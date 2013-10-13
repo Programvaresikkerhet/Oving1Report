@@ -1,0 +1,25 @@
+\clearpage
+\section{Testplan - White Box testing}
+In this part of the testing procedure we will take a look at the source code with focus on the source code flaws. We hope to manage to find parallels from the source code flaws to the vulnerability touch points exposed in the black box testing. We decided to focus mainly on the following elements from the {\it OWASP Top 10 Source Code Flaws} list: 
+
+\begin{itemize}
+	\item {\bf C1 - Design Weakness:} A design weakness occurs when the logic used to create the application did not address a threat modeling activity so it may be easy for an attacker to subvert the application's behavior. Design also covers an object's scope and visibility, so extra care should be taken to limit what a program exposes to others.
+	\item {\bf C2 - Architectural Weakness:} An application depends on many auxiliary systems when it runs; it does not stand on its own. An architectural weakness occurs when the source code interacts in an unsafe way with auxiliary systems.
+	\item {\bf C3 - Missing input validation:} When input is an option, it is very important to validate the input using filtering and validation functions. This is to ensure that the input contains what is expected, and to reduce the risk of malicious data being injected into the database. Unsanitized input data can lead to very dangerous runtime vulnerabilities such as cross site scripting (XSS) and injection flaws. To test this kind of vulnerability, we will try to use tools to check the code as well as go through the code manually to check functions for input to database as well as looking for input forms where the server receives data from the client.
+	\item {\bf C4 - Insecure communications:} An insecure communication vulnerability in the source code concerns how the operating system provided abstraction layer and communication layer provided by the framework are used. In other words, it is concerned with how the communication code is written; how the server communicates with server/client and which protocols are used. To check for this kind of vulnerability, we will go through the code manually.
+	\item {\bf C5 - Information leakage and improper error handling:} Applications can unintentionally leak information about their configuration, internal workings, or violate privacy through a variety of application security holes. Web applications will often leak information about their internal state through detailed or debug error messages, which can then be used to launch or even automate more powerful attacks. In the source code, we plan on checking for missing or poor exception handling, too verbose logging strings, etc.
+	\item {\bf C8 - Usage of potentially dangerous APIs:} Frameworks and libraries evolve to solve security issues.
+\end{itemize}
+
+
+{\bf Other approaches for testing}
+Besides the OWASP Top 10 list, we plan to scan through the code and look for the following points:
+\begin{itemize}
+	\item Where in the code do we put data into SQL?
+	\item Look for “INSERT” and “UPDATE” in the code. Is this handled in a proper way?
+	\item Does the code check the input? Any validation of filtering?
+	\item How is the database structured? 
+	\item Is any sensitive data being exposed?
+	\item Are there any hardcoded passwords or other sensitive data?
+\end{itemize}
+

@@ -1,0 +1,101 @@
+\clearpage
+\section{Testplan - Black Box Testing}
+
+\subsection{Test Categories}
+In this section we planned our tests based on the OWASP list. We have chosen the following main categories from the list to focus on:
+\begin{itemize}
+	\item {\bf Authentication testing (OWASP-AT):} Testing whether or not the authentication security on a webpage is adequate. Authentication involves confirming that the person trying to authenticate, is the correct person. Testing for possible vulnerabilities in the authentication section may include, but not limit to, guessable user accounts, brute force testing (trying several plausible login credentials over a longer period of time), or bypassing the authentication form.
+	\item {\bf Business logic testing (OWASP-BL):} This type of testing is one of the hardest to detect, but at the same time, usually one of the most detrimental to the application, if exploited. Type of business logic may include data such as location, logistics, product, prices, etc. The testing is normally not detected by vulnerability scanners because you need to have a specific domain knowledge.
+	\item {\bf Session management testing (OWASP-SM):} The session management is one of the most critical security areas of an application. If a hacker successfully manages to breach/corrupt the session management system, he/she can do serious harm to the website. Testing the session management may include, but not limited to manipulating cookies, changing session ID, or looking for exposed session variables.
+	\item {\bf Authorization testing (OWASP-AZ):} Testing for opportunities to gain privileged powers. This includes admin control when you’re only allowed normal user controls, the ability to change developer level settings, or direct path traversal through the URL.
+	\item {\bf Data validation testing(OWASP-DV):} One of the most comprehensive security areas. Validating data is important, but also difficult. It is nearly impossible to predict all the different data that a user / third-party might submit. Testing for this includes, but is not limited to testing for SQL injection-, cross-site scripting-, buffer overflow- and code injection vulnerabilities.
+
+\end{itemize}
+
+\newpage 
+
+\subsection{Blackbox testplan}
+
+\addtolength{\oddsidemargin}{-.5in}
+
+\begin{longtable}{| l | p{4.5cm} | p{7.5cm} |}
+	\hline
+	{\bf OWASP ID} & {\bf Description} & {\bf Testing strategy} \\ \hline
+	
+	OWASP-AT-001 & Testing for Credentials Transported over an Encrypted Channel & Checking the HTTP header of an attempted login, to see if the protocol is HTTP or HTTPS. \\ \hline
+	
+	OWASP-AT-002 & Testing for User Enumeration and Guessable User Account & Try to get valid usernames and/or passwords from the website by trying different inputs, and looking at the response. For instance, will the website return a response like “Incorrect username”, or “incorrect password”? If we get a valid username, it is likely that bruteforcing with the Brutus software will give a valid password for the account: look for default/common passwords.\\ \hline
+	
+	OWASP-AT-003 & Testing for Default or Guessable User Account & 
+First checking standard users like “Admin” and “user”, or maybe “test”, and then other regular ones. This is made hugely more simple by the “password was incorrect” reply, meaning we can actually check usernames independently.
+\\ \hline
+
+	OWASP-AT-004 & Testing for Brute Force
+ & 
+To get usernames and passwords Brutus software can be used. If we succeed getting valid/registered usernames, we can include them in the dictionary list of users. Using the Brutus software will hopefully return different accounts or passwords for already known usernames.
+ \\ \hline
+
+	OWASP-AT-005 & 
+Testing for Bypassing Authentication Schema
+& 
+First: Direct page request
+Second: Try different versions of “1=1” and other SQL injections.
+\\ \hline
+
+	OWASP-AT-006 & Testing for Vulnerable Remember Password and Pwd Reset
+ &  
+Inspect the website for functions to reset and/or remember passwords. If the website contains such functions, there is a chance that the website allows its users to store their passwords in the browser. If so, the password might be stored in the cache as cleartext. This is a vulnerability especially for public computers; try to read cookies. If the website contains secret questions for the password reset, it is possible to try to guess for common answers.
+\\ \hline
+
+	OWASP-SM-001 & Testing for Session Management Schema
+&  
+Check that all Set-Cookie directives are tagged as Secure, if any of the cookies are persistent, and what Expires= times are sed on persistent cookies. Also want to check which parts of the application require a cookie in order to be accessed and utilized
+\\ \hline
+
+	OWASP-SM-002 & Testing for cookies attributes
+ & 
+Get a cookie and check to see if the Secure flag is present, accompanied by the HttpOnly flag. If not, test for injection possibilities.
+\\ \hline
+
+	OWASP-SM-003 & Testing for Session Fixation
+ &  
+Try to use JavaScript in order to redirect a user to a different site, as well as collecting a cookie with a session identifier. If success, this could be used for session hijacking.
+\\ \hline
+
+	OWASP-SM-004 & Testing for Exposed Session Variables
+ & 
+Does the website use SSL? If yes, check possibility to bypass by simply typing “HTTP” instead of “HTTPS” (unencrypted session variables). Also, each request/response passing Session ID data shall be examined.
+\\ \hline
+
+	OWASP-SM-005 & Testing for CSRF
+ &  
+Analyze variables in forms via client source code (HTML page source), write a script for posting something on the authenticated user’s behalf, and try to inject it into the application.
+\\ \hline
+
+	OWASP-AZ-001 & Testing for Path Traversal
+ &  
+Start by reading all the URLs to check for direct access that might be modified, file requests by another part of the program that might be changed for an external file, or files we might want to get which are named in the URL.
+\\ \hline
+
+	OWASP-BL-001 & Testing for business logic
+ & 
+Look for flaws in the fundamentals of the website. Are there any logical flaws in the business logic? Familiarize with the website, try to change price on ordering items , try to order negative amount, and other parameters that can be changed.
+\\ \hline
+
+	OWASP-DV-001 & Testing for Reflected Cross site scripting &  
+
+Familiarize with the website, and look for areas where code could be submitted and stored in a way that could inflict other users that visits the site.
+
+\\ \hline 
+
+	OWASP-DV-005 & Testing for SQL Injection
+& 
+Used in other tests. Checking for the possibility to change the price of books, bypassing authentication with the “or “1=1” and so on. It is in addition automatically tested by tools we use.\\ \hline
+
+\end{longtable}
+
+
+
+
+
+

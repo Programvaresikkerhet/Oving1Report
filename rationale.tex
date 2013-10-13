@@ -1,0 +1,20 @@
+\clearpage
+\section{Rationale}
+
+{\large {\em “The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards.”}} -Gene Spafford
+
+In the dawning of our assignment the feeling of what to do quickly became overwhelming. Still, our slow start with a fractional group of 3 out of 5 became a group 4. Helped along by a studass it became a knowledgeable group, and finally at the fringe of delivery became choate. We were 5 and going strong. At this stage the original three, as well as the 4th, had discovered that knowing just a little bit of what we were expected to do greatly expanded what we thought we could do. And so the bewildered feeling receded and the confidence had grown so that the 5th member met an elevated gang of hackers when introduced. 
+
+We started out with SQL injecting the “1=1”’s and “\#”’s to see what’s what. When we suddenly sat there and had all the database metadata and stored information from webcruiser, there was a window of time where what we should do with all of it felt unnervingly like the feeling from the outset of this project.
+As the result came flowing, this feeling in turn receded, and report became gargantuan compared to the meager hopes of something to talk about that was our genesis.
+
+Complete and utter desolation in the database with the good old “Select * From *”, or actually any lower than that true SQL injection has proven monstrously difficult to achieve any sort of manual result from. Somewhat to blame is the far too easily chosen solution; “meh.. do it with a tool”. 
+
+The aforementioned feeling we all shared stemmed from our lack of knowledge about hacking and security in general. More close to nothingness than significance, our grasp weren’t even comparable to our reach. But we reached, and we grasped, and so we learned. 
+
+During black box testing we managed to breach the database and get all the data, but even though we guessed the hashing algorithm, we did not manage to crack the hashes and get access to the bookstore as whatever user. During white box testing we found out that it was used salt with big and small letters and increased the password length with 4 symbols. This drove us to the decision of selecting the correct charset and possible password lengths for rainbow chains and get test-passwords out of hashes. And we got to experience how important it is to know approximately what the password may look like.
+
+We tried to make some SQL injections during black box testing to Update some rows in the database without success. We tried it again with a better knowledge about how the system works, but still did not manage to do it. Probably java doesn’t want to run to statements in one, even though it says in specifications that it is possible.
+
+
+This work gave us a lot of experience in finding vulnerabilities and taught us thinking as attackers. Thinking as a hacker is very important to understand where and how the system can give unexpected by developer result. Now, having more knowledge about it, we can secure software better and cover at least some holes.
